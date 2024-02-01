@@ -11,8 +11,7 @@ class Solution:
 
         for j in range(len(pos)):
             result[i] = pos[j]
-            i += 1
-            result[i] = neg[j]
-            i += 1
+            result[i + 1] = neg[j]
+            i += 2
 
         return result
