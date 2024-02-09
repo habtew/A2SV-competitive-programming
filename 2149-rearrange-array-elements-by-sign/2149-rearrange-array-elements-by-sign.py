@@ -1,17 +1,12 @@
 class Solution:
     def rearrangeArray(self, nums: List[int]) -> List[int]:
-        pos, neg = [], []
+        result = [0] * len(nums)
+        ptr1, ptr2 = 0, 1
         for num in nums:
             if num > 0:
-                pos.append(num)
+                result[ptr1] = num
+                ptr1 += 2
             else:
-                neg.append(num)
-        result = [0] * len(nums)
-        i = 0
-
-        for j in range(len(pos)):
-            result[i] = pos[j]
-            result[i + 1] = neg[j]
-            i += 2
-
+                result[ptr2] = num
+                ptr2 += 2
         return result
