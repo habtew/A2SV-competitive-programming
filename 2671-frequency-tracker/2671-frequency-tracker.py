@@ -17,6 +17,7 @@ class FrequencyTracker:
             self.frequency_count[self.number_frequency[number] + 1] -= 1
     
     def hasFrequency(self, frequency):
+        print(self.frequency_count)
         return self.frequency_count[frequency] > 0
 
 
