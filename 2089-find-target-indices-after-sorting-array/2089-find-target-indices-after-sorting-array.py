@@ -4,7 +4,10 @@ class Solution:
             return []
         result = []
         nums.sort()
-        for i in range(len(nums)):
-            if target == nums[i]:
-                result.append(i)
+        first = nums.index(target)
+        while nums[first] == target:
+            result.append(first)
+            first += 1
+            if first == len(nums):
+                break
         return result
