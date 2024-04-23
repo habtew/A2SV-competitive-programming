@@ -6,16 +6,14 @@ class Solution:
                 stack.append(stack.pop() + stack.pop())
             elif token == '*':
                 stack.append(stack.pop() * stack.pop())
-            elif token == '/':
-                f = stack.pop()
-                s = stack.pop()
-                stack.append(int(s / f))
             elif token == '-':
-                f = stack.pop()
-                s = stack.pop()
-                stack.append(s - f)
+                first = stack.pop()
+                second = stack.pop()
+                stack.append(second - first)
+            elif token == '/':
+                first = stack.pop()
+                second = stack.pop()
+                stack.append(int(second / first))
             else:
                 stack.append(int(token))
         return stack[0]
-            
-        return stack[-1]
