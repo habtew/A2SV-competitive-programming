@@ -1,54 +1,88 @@
-class MyCircularDeque:
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.prev = None
+        self.next = None
 
+class MyCircularDeque:
     def __init__(self, k: int):
         self.size = k
-        self.stack = deque(maxlen=k)
+        self.head = None
+        self.tail = None
+        self.count = 0
 
     def insertFront(self, value: int) -> bool:
-        if len(self.stack) == self.size:
+        if self.isFull():
             return False
+        new_node = Node(value)
+        if self.isEmpty():
+            self.head = self.tail = new_node
+            new_node.next = new_node.prev = new_node
         else:
-            self.stack.appendleft(value)
-            return True
+            new_node.next = self.head
+            new_node.prev = self.tail
+            self.head.prev = new_node
+            self.tail.next = new_node
+            self.head = new_node
+        self.count += 1
+        return True
 
     def insertLast(self, value: int) -> bool:
-        if len(self.stack) == self.size:
+        if self.isFull():
             return False
+        new_node = Node(value)
+        if self.isEmpty():
+            self.head = self.tail = new_node
+            new_node.next = new_node.prev = new_node
         else:
-            self.stack.append(value)
-            return True
+            new_node.prev = self.tail
+            new_node.next = self.head
+            self.tail.next = new_node
+            self.head.prev = new_node
+            self.tail = new_node
+        self.count += 1
+        return True
 
     def deleteFront(self) -> bool:
-        if len(self.stack) == 0:
+        if self.isEmpty():
             return False
+        if self.head == self.tail:
+            self.head = self.tail = None
         else:
-            self.stack.popleft()
-            return True
+            self.head = self.head.next
+            self.head.prev = self.tail
+            self.tail.next = self.head
+        self.count -= 1
+        return True
 
     def deleteLast(self) -> bool:
-        if len(self.stack):
-            self.stack.pop()
-            return True
-        else:
+        if self.isEmpty():
             return False
+        if self.head == self.tail:
+            self.head = self.tail = None
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = self.head
+            self.head.prev = self.tail
+        self.count -= 1
+        return True
 
     def getFront(self) -> int:
-        if self.stack:
-            return self.stack[0]
-        else:
+        if self.isEmpty():
             return -1
+        return self.head.val
 
     def getRear(self) -> int:
-        if self.stack:
-            return self.stack[-1]
-        else:
+        if self.isEmpty():
             return -1
+        return self.tail.val
 
     def isEmpty(self) -> bool:
-        return not self.stack
+        return self.count == 0
 
     def isFull(self) -> bool:
-        return len(self.stack) == self.size
+        return self.count == self.size
+
 
 
 # Your MyCircularDeque object will be instantiated and called as such:
