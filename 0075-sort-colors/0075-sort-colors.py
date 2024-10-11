@@ -3,7 +3,24 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        for i in range(len(nums) - 1):
-            for j in range(0, len(nums) - i - 1):
-                if nums[j] >= nums[j + 1]:
-                    nums[j], nums[j + 1] = nums[j + 1], nums[j]
+
+        zeros, ones, twos = 0, 0, 0
+        for num in nums:
+            if num == 0:
+                zeros += 1
+            elif num == 1:
+                ones += 1
+            else:
+                twos += 1
+        idx = 0
+        for _ in range(zeros):
+            nums[idx] = 0
+            idx += 1
+        for _ in range(ones):
+            nums[idx] = 1
+            idx += 1
+        for _ in range(twos):
+            nums[idx] = 2
+            idx += 1
+
+        
