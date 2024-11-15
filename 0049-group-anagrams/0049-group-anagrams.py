@@ -1,10 +1,14 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        anagrams = {}
-        for s in strs:
-            sorted_s = ''.join(sorted(s))
-            if sorted_s in anagrams:
-                anagrams[sorted_s].append(s)
+        if not strs:
+            return [[""]]
+
+
+        maps = {}
+        for word in strs:
+            srtd = ''.join(sorted(word))
+            if srtd in maps:
+                maps[srtd].append(word)
             else:
-                anagrams[sorted_s] = [s]
-        return list(anagrams.values())
+                maps[srtd] = [word]
+        return [val for val in maps.values()]
